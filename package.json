@@ -1,0 +1,51 @@
+{
+  "name": "lazier-load",
+  "version": "1.0.0",
+  "description": "Smarter lazy-load which omits unnecessary items.",
+  "main": "lib/index.js",
+  "repository": {
+    "url": "https://github.com/jooohn/lazier-load",
+    "type": "git"
+  },
+  "author": "Jun Tomioka (https://github.com/jooohn)",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint src && eslint test",
+    "build": "npm run build:cjs && npm run build:umd && npm run build:umd:min",
+    "build:cjs": "babel src -d lib",
+    "build:umd": "cross-env NODE_ENV=development webpack src/index.js dist/lazier-load.js",
+    "build:umd:min": "cross-env NODE_ENV=production webpack src/index.js dist/lazier-load.min.js",
+    "build:tests": "rm -rf temp && babel test -d temp",
+    "clean": "rimraf lib temp dist",
+    "check": "npm run lint && npm run test",
+    "test": "npm run lint && npm run build && npm run build:tests && mocha temp/**/*.js"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "rxjs": "^5.0.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.21.0",
+    "babel-eslint": "^7.1.1",
+    "babel-loader": "^6.2.10",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.18.0",
+    "babel-plugin-transform-function-bind": "^6.8.0",
+    "babel-plugin-transform-object-rest-spread": "^6.20.2",
+    "babel-polyfill": "^6.20.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-register": "^6.18.0",
+    "chai": "^3.5.0",
+    "cross-env": "^3.1.3",
+    "eslint": "^3.12.2",
+    "eslint-config-airbnb-base": "^11.0.0",
+    "eslint-config-standard": "^6.2.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-promise": "^3.4.0",
+    "eslint-plugin-standard": "^2.0.1",
+    "mocha": "^3.2.0",
+    "rxjs": "^5.0.1",
+    "webpack": "^1.14.0",
+    "webpack-rxjs-externals": "^0.0.4"
+  }
+}
